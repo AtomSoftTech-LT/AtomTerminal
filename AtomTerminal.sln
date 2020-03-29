@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtomTerminal", "AtomTerminal\AtomTerminal.csproj", "{576C2AE2-2CC2-40AA-AECE-17020FD98326}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{576C2AE2-2CC2-40AA-AECE-17020FD98326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{576C2AE2-2CC2-40AA-AECE-17020FD98326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{576C2AE2-2CC2-40AA-AECE-17020FD98326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{576C2AE2-2CC2-40AA-AECE-17020FD98326}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C36864D-B5A1-4814-BDAC-56CDD4AEAACC}
+	EndGlobalSection
+EndGlobal

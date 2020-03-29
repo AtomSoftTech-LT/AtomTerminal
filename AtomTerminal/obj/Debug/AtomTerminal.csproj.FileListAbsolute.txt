@@ -1,0 +1,11 @@
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Debug\AtomTerminal.exe.config
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Debug\AtomTerminal.exe
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Debug\AtomTerminal.pdb
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.main.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.Properties.Resources.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.splash.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csproj.GenerateResource.cache
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csproj.CoreCompileInputs.cache
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.exe
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.pdb
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csprojAssemblyReference.cache
