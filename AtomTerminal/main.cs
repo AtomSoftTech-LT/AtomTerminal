@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -140,7 +141,7 @@ namespace AtomTerminal
             mySplash.Show();
 
             //Show it for 3 seconds or less
-            //Thread.Sleep(3000);
+            Thread.Sleep(3000);
 
             //Close the splash screen
             mySplash.Close();
@@ -339,12 +340,15 @@ namespace AtomTerminal
 
             //this controls the group box which holds the connections stuff
             grpConn.Top = txtTerm.Bottom + 4;
+            grpConn.Width = this.Width - 10;
 
             //this specifies where the transmit group box will appear
             grpTR.Top = grpConn.Bottom + 4;
+            grpTR.Width = this.Width - 10;
 
             //this controls the Receive group box
             grpRCV.Top = grpTR.Bottom + 4;
+            grpRCV.Width = this.Width - 10;
         }
 
         private void main_Resize(object sender, EventArgs e)
