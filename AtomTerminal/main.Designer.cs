@@ -48,6 +48,8 @@
             this.myCTRLBOX = new System.Windows.Forms.PictureBox();
             this.mySerialPort = new System.IO.Ports.SerialPort(this.components);
             this.grpTR = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.lblSentFile = new System.Windows.Forms.Label();
             this.btnSendFile = new System.Windows.Forms.Button();
             this.chkEcho = new System.Windows.Forms.CheckBox();
@@ -57,11 +59,13 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSend = new System.Windows.Forms.TextBox();
             this.grpRCV = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.radHexAscii = new System.Windows.Forms.RadioButton();
             this.radHex = new System.Windows.Forms.RadioButton();
             this.radASCII = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.btnSM = new System.Windows.Forms.Button();
+            this.btnLG = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpConn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.myCTRLBOX)).BeginInit();
             this.grpTR.SuspendLayout();
@@ -346,6 +350,30 @@
             this.grpTR.TabStop = false;
             this.grpTR.Text = "Transmit";
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
+            this.radioButton1.Location = new System.Drawing.Point(836, 18);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(114, 20);
+            this.radioButton1.TabIndex = 19;
+            this.radioButton1.Text = "Open Binary";
+            this.radioButton1.UseVisualStyleBackColor = false;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(736, 18);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(98, 20);
+            this.radioButton2.TabIndex = 18;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Open Text";
+            this.radioButton2.UseVisualStyleBackColor = false;
+            // 
             // lblSentFile
             // 
             this.lblSentFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -450,6 +478,10 @@
             // grpRCV
             // 
             this.grpRCV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpRCV.Controls.Add(this.label1);
+            this.grpRCV.Controls.Add(this.btnLG);
+            this.grpRCV.Controls.Add(this.btnSM);
+            this.grpRCV.Controls.Add(this.button1);
             this.grpRCV.Controls.Add(this.radHexAscii);
             this.grpRCV.Controls.Add(this.radHex);
             this.grpRCV.Controls.Add(this.radASCII);
@@ -460,7 +492,24 @@
             this.grpRCV.Size = new System.Drawing.Size(951, 70);
             this.grpRCV.TabIndex = 13;
             this.grpRCV.TabStop = false;
-            this.grpRCV.Text = "Receive";
+            this.grpRCV.Text = "View";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.Location = new System.Drawing.Point(828, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(117, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Clear Term";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // radHexAscii
             // 
@@ -497,29 +546,55 @@
             this.radASCII.Text = "ASCII";
             this.radASCII.UseVisualStyleBackColor = false;
             // 
-            // radioButton1
+            // btnSM
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton1.Location = new System.Drawing.Point(836, 18);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(114, 20);
-            this.radioButton1.TabIndex = 19;
-            this.radioButton1.Text = "Open Binary";
-            this.radioButton1.UseVisualStyleBackColor = false;
+            this.btnSM.BackColor = System.Drawing.Color.Transparent;
+            this.btnSM.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSM.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSM.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSM.Location = new System.Drawing.Point(222, 38);
+            this.btnSM.Name = "btnSM";
+            this.btnSM.Size = new System.Drawing.Size(30, 23);
+            this.btnSM.TabIndex = 9;
+            this.btnSM.Text = "-";
+            this.btnSM.UseVisualStyleBackColor = false;
+            this.btnSM.Click += new System.EventHandler(this.btnSM_Click);
             // 
-            // radioButton2
+            // btnLG
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(736, 18);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(98, 20);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Open Text";
-            this.radioButton2.UseVisualStyleBackColor = false;
+            this.btnLG.BackColor = System.Drawing.Color.Transparent;
+            this.btnLG.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnLG.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnLG.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLG.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLG.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLG.Location = new System.Drawing.Point(259, 38);
+            this.btnLG.Name = "btnLG";
+            this.btnLG.Size = new System.Drawing.Size(30, 23);
+            this.btnLG.TabIndex = 10;
+            this.btnLG.Text = "+";
+            this.btnLG.UseVisualStyleBackColor = false;
+            this.btnLG.Click += new System.EventHandler(this.btnLG_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label1.Location = new System.Drawing.Point(219, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Text Size";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // main
             // 
@@ -586,6 +661,10 @@
         private System.Windows.Forms.CheckBox chkEchoLog;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnLG;
+        private System.Windows.Forms.Button btnSM;
     }
 }
 

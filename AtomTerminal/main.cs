@@ -141,7 +141,7 @@ namespace AtomTerminal
             mySplash.Show();
 
             //Show it for 3 seconds or less
-            Thread.Sleep(3000);
+            Thread.Sleep(1500); //1.5 seconds (1 second, 500 miliseconds)
 
             //Close the splash screen
             mySplash.Close();
@@ -929,6 +929,39 @@ namespace AtomTerminal
                 return;
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (txtTerm.Text.Length > 0)
+            {
+                if(MessageBox.Show("Are you sure?","Clear Terminal",MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    txtTerm.Text = "";
+                }      
+            }
+        }
+
+        private void btnSM_Click(object sender, EventArgs e)
+        {
+            float newSize = txtTerm.Font.Size;
+
+            if (newSize > 3)
+                newSize--;
+
+            txtTerm.Font = new Font(txtTerm.Font.Name, newSize,
+                txtTerm.Font.Style, txtTerm.Font.Unit);
+        }
+
+        private void btnLG_Click(object sender, EventArgs e)
+        {
+            float newSize = txtTerm.Font.Size;
+
+            if (newSize < 22)
+                newSize++;
+
+            txtTerm.Font = new Font(txtTerm.Font.Name, newSize,
+                txtTerm.Font.Style, txtTerm.Font.Unit);
         }
     }
 }
