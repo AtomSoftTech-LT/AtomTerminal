@@ -922,11 +922,77 @@ namespace AtomTerminal
 
         private void btnSendFile_Click(object sender, EventArgs e)
         {
+            string myTextFile = "";
+            byte[] myBinaryFile;
+
             //if serial isnt connected then leave
             if (isSerialOpen == false)
             {
                 MessageBox.Show("Um.. Not Connected", "Oops...", MessageBoxButtons.OK);
                 return;
+            }
+
+            //Send a text file
+            if (radOpenTxt.Checked == true)
+            {
+                OpenFileDialog ofdText = new OpenFileDialog();
+                ofdText.Filter = "Text File|*.txt";
+                ofdText.Title = "Open Text File";
+                ofdText.ShowDialog();
+
+                String myTextFilename = ofdText.FileName;
+
+                if (myTextFilename.Length < 1)
+                    return;
+
+                myTextFile = System.IO.File.ReadAllText(myTextFilename);
+                mySerialPort.Write(myTextFile);
+            }
+
+            //Send a binary file
+            if (radOpenBin.Checked == true)
+            {
+                OpenFileDialog ofdText = new OpenFileDialog();
+                ofdText.Filter = "All Files|*.*";
+                ofdText.Title = "Open Binary File";
+                ofdText.ShowDialog();
+
+                String myBinaryFilename = ofdText.FileName;
+
+                if (myBinaryFilename.Length < 1)
+                    return;
+
+                myBinaryFile = File.ReadAllBytes(myBinaryFilename);
+                mySerialPort.Write(myBinaryFile, 0, myBinaryFile.Length);
+                myTextFile = Encoding.ASCII.GetString(myBinaryFile);
+                
+            }
+
+            //if echo is on then print to our screen also
+            if (chkEcho.Checked == true)
+            {
+                string myEcho = "\n\rAtomEcho: " + myTextFile;
+                txtTerm.Text += myEcho;
+
+                if (chkEchoLog.Checked == true)
+                {
+                    if (radLogTxt.Checked == true)
+                    {
+                        using (StreamWriter sw = File.AppendText(LogFileLocation))
+                        {
+                            sw.WriteLine(myEcho);
+                        }
+                    }
+                    if (radLogBin.Checked == true)
+                    {
+                        using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
+                        {
+                            byte[] myByteData = Encoding.ASCII.GetBytes(myEcho);
+                            writer.Write(myByteData);
+                        }
+                    }
+                }
+
             }
 
         }

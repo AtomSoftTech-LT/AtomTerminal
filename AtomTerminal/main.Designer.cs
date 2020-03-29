@@ -48,8 +48,8 @@
             this.myCTRLBOX = new System.Windows.Forms.PictureBox();
             this.mySerialPort = new System.IO.Ports.SerialPort(this.components);
             this.grpTR = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radOpenBin = new System.Windows.Forms.RadioButton();
+            this.radOpenTxt = new System.Windows.Forms.RadioButton();
             this.lblSentFile = new System.Windows.Forms.Label();
             this.btnSendFile = new System.Windows.Forms.Button();
             this.chkEcho = new System.Windows.Forms.CheckBox();
@@ -331,8 +331,8 @@
             // grpTR
             // 
             this.grpTR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpTR.Controls.Add(this.radioButton1);
-            this.grpTR.Controls.Add(this.radioButton2);
+            this.grpTR.Controls.Add(this.radOpenBin);
+            this.grpTR.Controls.Add(this.radOpenTxt);
             this.grpTR.Controls.Add(this.lblSentFile);
             this.grpTR.Controls.Add(this.btnSendFile);
             this.grpTR.Controls.Add(this.chkEcho);
@@ -350,29 +350,29 @@
             this.grpTR.TabStop = false;
             this.grpTR.Text = "Transmit";
             // 
-            // radioButton1
+            // radOpenBin
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton1.Location = new System.Drawing.Point(836, 18);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(114, 20);
-            this.radioButton1.TabIndex = 19;
-            this.radioButton1.Text = "Open Binary";
-            this.radioButton1.UseVisualStyleBackColor = false;
+            this.radOpenBin.AutoSize = true;
+            this.radOpenBin.BackColor = System.Drawing.Color.Transparent;
+            this.radOpenBin.Location = new System.Drawing.Point(836, 18);
+            this.radOpenBin.Name = "radOpenBin";
+            this.radOpenBin.Size = new System.Drawing.Size(114, 20);
+            this.radOpenBin.TabIndex = 19;
+            this.radOpenBin.Text = "Open Binary";
+            this.radOpenBin.UseVisualStyleBackColor = false;
             // 
-            // radioButton2
+            // radOpenTxt
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.BackColor = System.Drawing.Color.Transparent;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(736, 18);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(98, 20);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Open Text";
-            this.radioButton2.UseVisualStyleBackColor = false;
+            this.radOpenTxt.AutoSize = true;
+            this.radOpenTxt.BackColor = System.Drawing.Color.Transparent;
+            this.radOpenTxt.Checked = true;
+            this.radOpenTxt.Location = new System.Drawing.Point(736, 18);
+            this.radOpenTxt.Name = "radOpenTxt";
+            this.radOpenTxt.Size = new System.Drawing.Size(98, 20);
+            this.radOpenTxt.TabIndex = 18;
+            this.radOpenTxt.TabStop = true;
+            this.radOpenTxt.Text = "Open Text";
+            this.radOpenTxt.UseVisualStyleBackColor = false;
             // 
             // lblSentFile
             // 
@@ -659,8 +659,8 @@
         private System.Windows.Forms.CheckBox chkEnLog;
         private System.Windows.Forms.Label lblLogFile;
         private System.Windows.Forms.CheckBox chkEchoLog;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radOpenBin;
+        private System.Windows.Forms.RadioButton radOpenTxt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLG;
