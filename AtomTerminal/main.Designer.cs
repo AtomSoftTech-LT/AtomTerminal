@@ -59,6 +59,9 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSend = new System.Windows.Forms.TextBox();
             this.grpRCV = new System.Windows.Forms.GroupBox();
+            this.btnBold = new System.Windows.Forms.Button();
+            this.btnFGColor = new System.Windows.Forms.Button();
+            this.btnBGColor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnLG = new System.Windows.Forms.Button();
             this.btnSM = new System.Windows.Forms.Button();
@@ -66,6 +69,7 @@
             this.radHexAscii = new System.Windows.Forms.RadioButton();
             this.radHex = new System.Windows.Forms.RadioButton();
             this.radASCII = new System.Windows.Forms.RadioButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.grpConn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.myCTRLBOX)).BeginInit();
             this.grpTR.SuspendLayout();
@@ -76,13 +80,14 @@
             // 
             this.txtTerm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTerm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtTerm.BackColor = System.Drawing.Color.SlateGray;
             this.txtTerm.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTerm.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTerm.DetectUrls = false;
+            this.txtTerm.Font = new System.Drawing.Font("Courier New", 12F);
             this.txtTerm.ForeColor = System.Drawing.SystemColors.Menu;
             this.txtTerm.Location = new System.Drawing.Point(5, 29);
             this.txtTerm.Name = "txtTerm";
-            this.txtTerm.Size = new System.Drawing.Size(955, 354);
+            this.txtTerm.Size = new System.Drawing.Size(988, 354);
             this.txtTerm.TabIndex = 0;
             this.txtTerm.Text = "";
             this.txtTerm.TextChanged += new System.EventHandler(this.txtTerm_TextChanged);
@@ -106,7 +111,7 @@
             this.grpConn.ForeColor = System.Drawing.Color.LightGray;
             this.grpConn.Location = new System.Drawing.Point(5, 389);
             this.grpConn.Name = "grpConn";
-            this.grpConn.Size = new System.Drawing.Size(952, 56);
+            this.grpConn.Size = new System.Drawing.Size(985, 56);
             this.grpConn.TabIndex = 1;
             this.grpConn.TabStop = false;
             this.grpConn.Text = "Serial Configuration";
@@ -302,7 +307,7 @@
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.lblTitle.Location = new System.Drawing.Point(9, 2);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(951, 24);
+            this.lblTitle.Size = new System.Drawing.Size(984, 24);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "AtomTerminal - No Connection";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -313,7 +318,7 @@
             // 
             this.myCTRLBOX.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.myCTRLBOX.Image = ((System.Drawing.Image)(resources.GetObject("myCTRLBOX.Image")));
-            this.myCTRLBOX.Location = new System.Drawing.Point(857, 4);
+            this.myCTRLBOX.Location = new System.Drawing.Point(873, 4);
             this.myCTRLBOX.Name = "myCTRLBOX";
             this.myCTRLBOX.Size = new System.Drawing.Size(99, 24);
             this.myCTRLBOX.TabIndex = 2;
@@ -345,7 +350,7 @@
             this.grpTR.ForeColor = System.Drawing.Color.LightGray;
             this.grpTR.Location = new System.Drawing.Point(6, 453);
             this.grpTR.Name = "grpTR";
-            this.grpTR.Size = new System.Drawing.Size(952, 60);
+            this.grpTR.Size = new System.Drawing.Size(985, 60);
             this.grpTR.TabIndex = 4;
             this.grpTR.TabStop = false;
             this.grpTR.Text = "Transmit";
@@ -478,6 +483,9 @@
             // grpRCV
             // 
             this.grpRCV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpRCV.Controls.Add(this.btnBold);
+            this.grpRCV.Controls.Add(this.btnFGColor);
+            this.grpRCV.Controls.Add(this.btnBGColor);
             this.grpRCV.Controls.Add(this.label1);
             this.grpRCV.Controls.Add(this.btnLG);
             this.grpRCV.Controls.Add(this.btnSM);
@@ -489,10 +497,61 @@
             this.grpRCV.ForeColor = System.Drawing.Color.LightGray;
             this.grpRCV.Location = new System.Drawing.Point(6, 523);
             this.grpRCV.Name = "grpRCV";
-            this.grpRCV.Size = new System.Drawing.Size(951, 70);
+            this.grpRCV.Size = new System.Drawing.Size(984, 70);
             this.grpRCV.TabIndex = 13;
             this.grpRCV.TabStop = false;
             this.grpRCV.Text = "View";
+            // 
+            // btnBold
+            // 
+            this.btnBold.BackColor = System.Drawing.Color.Transparent;
+            this.btnBold.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnBold.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnBold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnBold.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBold.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBold.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnBold.Location = new System.Drawing.Point(674, 38);
+            this.btnBold.Name = "btnBold";
+            this.btnBold.Size = new System.Drawing.Size(60, 23);
+            this.btnBold.TabIndex = 17;
+            this.btnBold.Text = "BOLD";
+            this.btnBold.UseVisualStyleBackColor = false;
+            this.btnBold.Click += new System.EventHandler(this.btnBold_Click);
+            // 
+            // btnFGColor
+            // 
+            this.btnFGColor.BackColor = System.Drawing.Color.Transparent;
+            this.btnFGColor.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnFGColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnFGColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnFGColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFGColor.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFGColor.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnFGColor.Location = new System.Drawing.Point(551, 38);
+            this.btnFGColor.Name = "btnFGColor";
+            this.btnFGColor.Size = new System.Drawing.Size(117, 23);
+            this.btnFGColor.TabIndex = 16;
+            this.btnFGColor.Text = "FG Color";
+            this.btnFGColor.UseVisualStyleBackColor = false;
+            this.btnFGColor.Click += new System.EventHandler(this.btnFGColor_Click);
+            // 
+            // btnBGColor
+            // 
+            this.btnBGColor.BackColor = System.Drawing.Color.Transparent;
+            this.btnBGColor.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnBGColor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnBGColor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnBGColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBGColor.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBGColor.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnBGColor.Location = new System.Drawing.Point(428, 38);
+            this.btnBGColor.Name = "btnBGColor";
+            this.btnBGColor.Size = new System.Drawing.Size(117, 23);
+            this.btnBGColor.TabIndex = 15;
+            this.btnBGColor.Text = "BG Color";
+            this.btnBGColor.UseVisualStyleBackColor = false;
+            this.btnBGColor.Click += new System.EventHandler(this.btnBGColor_Click);
             // 
             // label1
             // 
@@ -503,7 +562,7 @@
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(219, 17);
+            this.label1.Location = new System.Drawing.Point(342, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 16);
             this.label1.TabIndex = 14;
@@ -519,7 +578,7 @@
             this.btnLG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLG.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLG.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnLG.Location = new System.Drawing.Point(259, 38);
+            this.btnLG.Location = new System.Drawing.Point(384, 38);
             this.btnLG.Name = "btnLG";
             this.btnLG.Size = new System.Drawing.Size(30, 23);
             this.btnLG.TabIndex = 10;
@@ -536,7 +595,7 @@
             this.btnSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSM.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSM.Location = new System.Drawing.Point(222, 38);
+            this.btnSM.Location = new System.Drawing.Point(347, 38);
             this.btnSM.Name = "btnSM";
             this.btnSM.Size = new System.Drawing.Size(30, 23);
             this.btnSM.TabIndex = 9;
@@ -553,9 +612,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(305, 38);
+            this.button1.Location = new System.Drawing.Point(210, 22);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 23);
+            this.button1.Size = new System.Drawing.Size(117, 39);
             this.button1.TabIndex = 8;
             this.button1.Text = "Clear Term";
             this.button1.UseVisualStyleBackColor = false;
@@ -601,7 +660,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(31)))));
-            this.ClientSize = new System.Drawing.Size(964, 600);
+            this.ClientSize = new System.Drawing.Size(997, 600);
             this.Controls.Add(this.grpConn);
             this.Controls.Add(this.grpRCV);
             this.Controls.Add(this.grpTR);
@@ -628,8 +687,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.RichTextBox txtTerm;
         private System.Windows.Forms.GroupBox grpConn;
         private System.Windows.Forms.ComboBox cmbBaud;
         private System.Windows.Forms.ComboBox cmbPorts;
@@ -665,6 +722,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLG;
         private System.Windows.Forms.Button btnSM;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button btnBGColor;
+        private System.Windows.Forms.Button btnFGColor;
+        private System.Windows.Forms.Button btnBold;
+        protected System.Windows.Forms.RichTextBox txtTerm;
     }
 }
 

@@ -1029,6 +1029,39 @@ namespace AtomTerminal
             txtTerm.Font = new Font(txtTerm.Font.Name, newSize,
                 txtTerm.Font.Style, txtTerm.Font.Unit);
         }
+
+        private void btnBGColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Color myChosenColor = colorDialog1.Color;
+                txtTerm.BackColor = myChosenColor;
+            }
+        }
+
+        private void btnFGColor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Color myChosenColor = colorDialog1.Color;
+                txtTerm.ForeColor = myChosenColor;
+            }
+        }
+
+        
+        private void btnBold_Click(object sender, EventArgs e)
+        {
+            bool isBold = txtTerm.Font.Bold;
+
+            if (isBold)
+            {  
+                txtTerm.Font = new Font(txtTerm.Font.Name, txtTerm.Font.Size, FontStyle.Regular, txtTerm.Font.Unit);
+            }
+            else
+            {
+                txtTerm.Font = new Font(txtTerm.Font.Name, txtTerm.Font.Size, FontStyle.Bold, txtTerm.Font.Unit);
+            }
+        }
     }
 }
 
