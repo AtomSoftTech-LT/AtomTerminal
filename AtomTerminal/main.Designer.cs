@@ -59,13 +59,13 @@
             this.btnSend = new System.Windows.Forms.Button();
             this.txtSend = new System.Windows.Forms.TextBox();
             this.grpRCV = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnLG = new System.Windows.Forms.Button();
+            this.btnSM = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.radHexAscii = new System.Windows.Forms.RadioButton();
             this.radHex = new System.Windows.Forms.RadioButton();
             this.radASCII = new System.Windows.Forms.RadioButton();
-            this.btnSM = new System.Windows.Forms.Button();
-            this.btnLG = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpConn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.myCTRLBOX)).BeginInit();
             this.grpTR.SuspendLayout();
@@ -494,6 +494,56 @@
             this.grpRCV.TabStop = false;
             this.grpRCV.Text = "View";
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label1.Location = new System.Drawing.Point(219, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Text Size";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnLG
+            // 
+            this.btnLG.BackColor = System.Drawing.Color.Transparent;
+            this.btnLG.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnLG.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnLG.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLG.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLG.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLG.Location = new System.Drawing.Point(259, 38);
+            this.btnLG.Name = "btnLG";
+            this.btnLG.Size = new System.Drawing.Size(30, 23);
+            this.btnLG.TabIndex = 10;
+            this.btnLG.Text = "+";
+            this.btnLG.UseVisualStyleBackColor = false;
+            this.btnLG.Click += new System.EventHandler(this.btnLG_Click);
+            // 
+            // btnSM
+            // 
+            this.btnSM.BackColor = System.Drawing.Color.Transparent;
+            this.btnSM.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSM.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSM.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSM.Location = new System.Drawing.Point(222, 38);
+            this.btnSM.Name = "btnSM";
+            this.btnSM.Size = new System.Drawing.Size(30, 23);
+            this.btnSM.TabIndex = 9;
+            this.btnSM.Text = "-";
+            this.btnSM.UseVisualStyleBackColor = false;
+            this.btnSM.Click += new System.EventHandler(this.btnSM_Click);
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
@@ -503,7 +553,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(828, 40);
+            this.button1.Location = new System.Drawing.Point(305, 38);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 23);
             this.button1.TabIndex = 8;
@@ -543,58 +593,8 @@
             this.radASCII.Size = new System.Drawing.Size(66, 20);
             this.radASCII.TabIndex = 0;
             this.radASCII.TabStop = true;
-            this.radASCII.Text = "ASCII";
+            this.radASCII.Text = "Ascii";
             this.radASCII.UseVisualStyleBackColor = false;
-            // 
-            // btnSM
-            // 
-            this.btnSM.BackColor = System.Drawing.Color.Transparent;
-            this.btnSM.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnSM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSM.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSM.Location = new System.Drawing.Point(222, 38);
-            this.btnSM.Name = "btnSM";
-            this.btnSM.Size = new System.Drawing.Size(30, 23);
-            this.btnSM.TabIndex = 9;
-            this.btnSM.Text = "-";
-            this.btnSM.UseVisualStyleBackColor = false;
-            this.btnSM.Click += new System.EventHandler(this.btnSM_Click);
-            // 
-            // btnLG
-            // 
-            this.btnLG.BackColor = System.Drawing.Color.Transparent;
-            this.btnLG.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnLG.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnLG.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnLG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLG.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLG.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnLG.Location = new System.Drawing.Point(259, 38);
-            this.btnLG.Name = "btnLG";
-            this.btnLG.Size = new System.Drawing.Size(30, 23);
-            this.btnLG.TabIndex = 10;
-            this.btnLG.Text = "+";
-            this.btnLG.UseVisualStyleBackColor = false;
-            this.btnLG.Click += new System.EventHandler(this.btnLG_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(219, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 16);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Text Size";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // main
             // 
