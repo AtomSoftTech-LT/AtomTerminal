@@ -12,14 +12,16 @@ using System.Windows.Forms;
 
 namespace AtomTerminal
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>")]
     public partial class main : Form
     {
-        public bool isMaximized = false;
-        public bool isSerialOpen = false;
-        public List<int> rxBuff;
+        private bool isMaximized = false;
+        private bool isSerialOpen = false;
+        
         string LogFileLocation = "";
 
-        public string[] myComms;
+        
 
         public main()
         {
@@ -27,8 +29,8 @@ namespace AtomTerminal
 
         }
 
-        public delegate void AddDataDelegate(string myString);
-        public AddDataDelegate myDelegate;
+        public delegate void AddDataDelegate(string MyString);
+        private AddDataDelegate MyDelegate;
 
         /*
          *The below is for ALLOWING RESIZE
@@ -36,14 +38,14 @@ namespace AtomTerminal
          * Allows custom border with resize 
          */
  
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
+        public const int WMNCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
 
         [DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd,
+        private static extern int SendMessage(IntPtr hWnd,
                          int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
+        private static extern bool ReleaseCapture();
         
         
         protected override void WndProc(ref Message m)
@@ -99,13 +101,13 @@ namespace AtomTerminal
         {
 
             //Variable Array to hold port names
-            string[] ports = null;
+            string[] ports;
 
             //Get port names and place in array
             ports = SerialPort.GetPortNames();
 
             //Clear the combo box that list the ports
-            cmbPorts.Items.Clear();
+            CmbPorts.Items.Clear();
 
             //Sort the array
             Array.Sort<string>(ports);
@@ -113,38 +115,38 @@ namespace AtomTerminal
             //Add the port names to the combo box
             for (int i = 0; i < ports.Length; i++)
             {
-                cmbPorts.Items.Add(ports[i]);
+                CmbPorts.Items.Add(ports[i]);
             }
 
             //Add a new item called refresh, used to refresh the list.
-            cmbPorts.Items.Add("Refresh...");
+            CmbPorts.Items.Add("Refresh...");
 
             //select the first item in the combo box list
-            cmbPorts.Text = cmbPorts.Items[0].ToString();
+            CmbPorts.Text = CmbPorts.Items[0].ToString();
         }
 
-        private void main_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
             //used to jump thread, for adding data received from serial port
-            this.myDelegate = new AddDataDelegate(AddDataMethod);
+            this.MyDelegate = new AddDataDelegate(AddDataMethod);
 
             //BG COLOR is 29,29,31 aka 1D1D1F
-            lblTitle.Text = "AtomTerminal - No Connection";
+            LblTitle.Text = "AtomTerminal - No Connection";
 
             //Hide the main screen
             this.Visible = false;
 
             //load splash screen
-            Form mySplash = new splash();
+            Form MySplash = new splash();
             
-            //show my splash screen
-            mySplash.Show();
+            //show My splash screen
+            MySplash.Show();
 
             //Show it for 3 seconds or less
             Thread.Sleep(1500); //1.5 seconds (1 second, 500 miliseconds)
 
             //Close the splash screen
-            mySplash.Close();
+            MySplash.Close();
 
             //make our main app form visible
             this.Visible = true;
@@ -156,14 +158,14 @@ namespace AtomTerminal
             GroupResize();
         }
 
-        public void AddDataMethod(string myString)
+        public void AddDataMethod(string MyString)
         {
             //Boolean variables to determine what kind of logging is to be done.
             bool LogBin = false;
             bool LogTxt = false;
 
             //Check if Log is selected 
-            if (chkEnLog.Checked == true)
+            if (ChkEnLog.Checked == true)
             {
                 //determine what king of logging is to be done
                 if (radLogBin.Checked == true)  
@@ -178,7 +180,7 @@ namespace AtomTerminal
             if (radASCII.Checked == true)   //Display as ASCII
             {
                 //Simple text is easy. Just add it to the textbox
-                txtTerm.Text += myString;
+                TxtTerm.Text += MyString;
 
                 //Log as text file
                 if (LogTxt == true)
@@ -186,7 +188,7 @@ namespace AtomTerminal
                     //Open file and append the string
                     using (StreamWriter sw = File.AppendText(LogFileLocation))
                     {
-                        sw.WriteLine(myString);
+                        sw.WriteLine(MyString);
                     }
                 }
                 if (LogBin == true) //Logging as text file
@@ -194,8 +196,8 @@ namespace AtomTerminal
                     //open log file and append our new hex + [ascii]
                     using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                     {
-                        byte[] myByteData = Encoding.ASCII.GetBytes(myString);
-                        writer.Write(myByteData);
+                        byte[] MyByteData = Encoding.ASCII.GetBytes(MyString);
+                        writer.Write(MyByteData);
                     }
                 }
                 return;
@@ -204,7 +206,7 @@ namespace AtomTerminal
             if (radHex.Checked == true)     //Display as hex
             {
                 //Convert the string into a byte array
-                byte[] ba = Encoding.Default.GetBytes(myString);
+                byte[] ba = Encoding.Default.GetBytes(MyString);
 
                 //Convert the byte array to a string with hex values instead of chars
                 var hexString = BitConverter.ToString(ba);
@@ -221,7 +223,7 @@ namespace AtomTerminal
                 hexString = hexString.TrimStart();
 
                 //Append our new string to the text box
-                txtTerm.Text += hexString;
+                TxtTerm.Text += hexString;
 
                 
                 if (LogTxt == true)     //We are logging as a text file
@@ -237,8 +239,8 @@ namespace AtomTerminal
                     //open log file and append our new hex + [ascii]
                     using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                     {
-                        byte[] myByteData = Encoding.ASCII.GetBytes(hexString);
-                        writer.Write(myByteData);
+                        byte[] MyByteData = Encoding.ASCII.GetBytes(hexString);
+                        writer.Write(MyByteData);
                     }
                 }
                 return;
@@ -247,7 +249,7 @@ namespace AtomTerminal
             if (radHexAscii.Checked == true)    //Display Hex and Ascii ex: received number 0 aka: 0x30 [0]
             {
                 //turn string of incoming data into bytes
-                byte[] ba = Encoding.Default.GetBytes(myString);
+                byte[] ba = Encoding.Default.GetBytes(MyString);
                 
                 //variable for new hex [ascii] string
                 string hexString2 = "";
@@ -256,7 +258,7 @@ namespace AtomTerminal
                 int arlen = ba.Length;
 
                 //temp string used for converting each byte to a string
-                string tmpSTR = "";
+                string tmpSTR;
 
                 //loop the byte count
                 for (int x = 0; x < arlen; x++)
@@ -281,7 +283,7 @@ namespace AtomTerminal
                 }
 
                 //add the new complete hexstring2 to our text box
-                txtTerm.Text += hexString2;
+                TxtTerm.Text += hexString2;
 
                 if (LogTxt == true) //Logging as text file
                 {
@@ -296,137 +298,137 @@ namespace AtomTerminal
                     //open log file and append our new hex + [ascii]
                     using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                     {
-                        byte[] myByteData = Encoding.ASCII.GetBytes(hexString2);
-                        writer.Write(myByteData);
+                        byte[] MyByteData = Encoding.ASCII.GetBytes(hexString2);
+                        writer.Write(MyByteData);
                     }
                 }
                 return;
             }
         }
 
-        private void mySerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void MySerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             //get the amount of bytes in buffer
-            int mySize = mySerialPort.BytesToRead;
+            int MySize = MySerialPort.BytesToRead;
 
-            //make a new buffer to hold mySize amount of bytes
-            byte[] myBuffer = new byte[mySize];
+            //make a new buffer to hold MySize amount of bytes
+            byte[] MyBuffer = new byte[MySize];
 
-            //Read mySize of bytes from serial port to our buffer
-            mySerialPort.Read(myBuffer, 0, mySize);
+            //Read MySize of bytes from serial port to our buffer
+            MySerialPort.Read(MyBuffer, 0, MySize);
 
             //temp string for sending our data around. 
             // might leave byte array
             string tempSTR = "";
 
             //loop bytes and create a string from them
-            for (int x = 0; x < mySize; x++)
+            for (int x = 0; x < MySize; x++)
             {
-                tempSTR += Convert.ToChar(myBuffer[x]);
+                tempSTR += Convert.ToChar(MyBuffer[x]);
             }
 
             //send the bytes to our Delegate which will process it and display it on the other thread.
-            txtTerm.Invoke(this.myDelegate, new Object[] { tempSTR });
+            TxtTerm.Invoke(this.MyDelegate, new Object[] { tempSTR });
         }
 
         void GroupResize()
         {
             //This is for the control box. The Minimize, Maximize/Restore and Close buttons
-            myCTRLBOX.Left = this.Width - myCTRLBOX.Width - 3;
+            MyCTRLBOX.Left = this.Width - MyCTRLBOX.Width - 3;
 
             //This controls where our actual terminal text box will be
-            txtTerm.Width = this.Width - 10;
-            txtTerm.Height = this.Height - 230;
+            TxtTerm.Width = this.Width - 10;
+            TxtTerm.Height = this.Height - 230;
 
             //this controls the group box which holds the connections stuff
-            grpConn.Top = txtTerm.Bottom + 4;
-            grpConn.Width = this.Width - 10;
+            GrpConn.Top = TxtTerm.Bottom + 4;
+            GrpConn.Width = this.Width - 10;
 
             //this specifies where the transmit group box will appear
-            grpTR.Top = grpConn.Bottom + 4;
-            grpTR.Width = this.Width - 10;
+            GrpTR.Top = GrpConn.Bottom + 4;
+            GrpTR.Width = this.Width - 10;
 
             //this controls the Receive group box
-            grpRCV.Top = grpTR.Bottom + 4;
-            grpRCV.Width = this.Width - 10;
+            GrpRCV.Top = GrpTR.Bottom + 4;
+            GrpRCV.Width = this.Width - 10;
         }
 
-        private void main_Resize(object sender, EventArgs e)
+        private void Main_Resize(object sender, EventArgs e)
         {
             //call our resize funtion
             GroupResize();
         }
 
-        private void cmbPorts_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
             //determine which index was selected
-            int myIndex = cmbPorts.SelectedIndex;
+            int MyIndex = CmbPorts.SelectedIndex;
 
             //get the text of the selected item
-            string myText = cmbPorts.Items[myIndex].ToString();
+            string MyText = CmbPorts.Items[MyIndex].ToString();
 
             //if the text is "Refresh..." then issue a refresh of the ports
-            if (myText == "Refresh...")
+            if (MyText == "Refresh...")
                 GetPorts();
         }
 
-        private void cmbFlow_MouseMove(object sender, EventArgs e)
+        private void CmbFlow_MouseMove(object sender, EventArgs e)
         {
             string newText = "Serial Configuration - Flow Control";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
-        private void grpConn_MouseHover(object sender, EventArgs e)
+        private void GrpConn_MouseHover(object sender, EventArgs e)
         {
             string newText = "Serial Configuration";
 
-            if (grpConn.Text != newText)
+            if (GrpConn.Text != newText)
             {
-                grpConn.Text = newText;
-                lblTitle.Focus();
+                GrpConn.Text = newText;
+                LblTitle.Focus();
             }
         }
 
-        private void cmbPorts_MouseMove(object sender, MouseEventArgs e)
+        private void CmbPorts_MouseMove(object sender, MouseEventArgs e)
         {
             string newText = "Serial Configuration - Comm. Port";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
-        private void cmbBaud_MouseMove(object sender, MouseEventArgs e)
+        private void CmbBaud_MouseMove(object sender, MouseEventArgs e)
         {
             string newText = "Serial Configuration - Baud Rate";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
-        private void cmbBits_MouseMove(object sender, MouseEventArgs e)
+        private void CmbBits_MouseMove(object sender, MouseEventArgs e)
         {
             string newText = "Serial Configuration - Bits";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
-        private void cmbParity_MouseMove(object sender, MouseEventArgs e)
+        private void CmbParity_MouseMove(object sender, MouseEventArgs e)
         {
             string newText = "Serial Configuration - Parity";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
-        private void cmbStop_MouseMove(object sender, MouseEventArgs e)
+        private void CmbStop_MouseMove(object sender, MouseEventArgs e)
         {
             string newText = "Serial Configuration - Stop Bits";
 
-            if (grpConn.Text != newText)
-                grpConn.Text = newText;
+            if (GrpConn.Text != newText)
+                GrpConn.Text = newText;
         }
 
         //Below values are defined for control box button coordinates
@@ -439,94 +441,94 @@ namespace AtomTerminal
         const int CONTROL_TOP = 1;
         const int CONTROL_BOTTOM = 18;
 
-        private void myCTRLBOX_MouseMove(object sender, MouseEventArgs e)
+        private void MyCTRLBOX_MouseMove(object sender, MouseEventArgs e)
         {
-            // txtTerm.Text = "X: " + e.X.ToString() + "\n\r Y: " + e.Y.ToString();
+            // TxtTerm.Text = "X: " + e.X.ToString() + "\n\r Y: " + e.Y.ToString();
 
             //Load our current mouse location into some variables
-            int myX = e.X;
-            int myY = e.Y;
+            int MyX = e.X;
+            int MyY = e.Y;
 
-            if ((myY >= CONTROL_TOP) & (myY <= CONTROL_BOTTOM))
+            if ((MyY >= CONTROL_TOP) & (MyY <= CONTROL_BOTTOM))
             {
                 //preload our control box image in case 
                 var newCtrl = Properties.Resources.ControlBox;
 
-                if ((myX >= MIN_L) & (myX <= MIN_R))
+                if ((MyX >= MIN_L) & (MyX <= MIN_R))
                 {
                     //Load new MIN BUTTON
                     newCtrl = Properties.Resources.c_min;
 
                 }
 
-                if ((myX >= MAX_L) & (myX <= MAX_R))
+                if ((MyX >= MAX_L) & (MyX <= MAX_R))
                 {
                     //Load new MAX BUTTON
                     newCtrl = Properties.Resources.c_max;
                 }
 
-                if ((myX >= CLOSE_L) & (myX <= CLOSE_R))
+                if ((MyX >= CLOSE_L) & (MyX <= CLOSE_R))
                 {
                     //Load new Close BUTTON
                     newCtrl = Properties.Resources.c_close;
                 }
 
                 //Set our new image to picturebox 
-                myCTRLBOX.Image = newCtrl;
+                MyCTRLBOX.Image = newCtrl;
             }
         }
 
-        private void myCTRLBOX_MouseDown(object sender, MouseEventArgs e)
+        private void MyCTRLBOX_MouseDown(object sender, MouseEventArgs e)
         {
-            int myX = e.X;
-            int myY = e.Y;
+            int MyX = e.X;
+            int MyY = e.Y;
 
-            if ((myY >= CONTROL_TOP) & (myY <= CONTROL_BOTTOM))
+            if ((MyY >= CONTROL_TOP) & (MyY <= CONTROL_BOTTOM))
             {
                 //preload our control box image in case 
                 var newCtrl = Properties.Resources.ControlBox;
 
-                if ((myX >= MIN_L) & (myX <= MIN_R))
+                if ((MyX >= MIN_L) & (MyX <= MIN_R))
                 {
                     //Load new MIN BUTTON
                     newCtrl = Properties.Resources.h_min;
 
                 }
 
-                if ((myX >= MAX_L) & (myX <= MAX_R))
+                if ((MyX >= MAX_L) & (MyX <= MAX_R))
                 {
                     //Load new MAX BUTTON
                     newCtrl = Properties.Resources.h_max;
                 }
 
-                if ((CLOSE_L >= 80) & (myX <= CLOSE_R))
+                if ((CLOSE_L >= 80) & (MyX <= CLOSE_R))
                 {
                     //Load new Close BUTTON
                     newCtrl = Properties.Resources.h_close;
                 }
 
                 //Set our new image to picturebox 
-                myCTRLBOX.Image = newCtrl;
+                MyCTRLBOX.Image = newCtrl;
             }
         }
 
-        private void myCTRLBOX_MouseClick(object sender, MouseEventArgs e)
+        private void MyCTRLBOX_MouseClick(object sender, MouseEventArgs e)
         {
-            int myX = e.X;
-            int myY = e.Y;
+            int MyX = e.X;
+            int MyY = e.Y;
 
-            if ((myY >= CONTROL_TOP) & (myY <= CONTROL_BOTTOM))
+            if ((MyY >= CONTROL_TOP) & (MyY <= CONTROL_BOTTOM))
             {
                 //preload our control box image in case 
                 var OrigCtrl = Properties.Resources.ControlBox;
 
-                if ((myX >= MIN_L) & (myX <= MIN_R))
+                if ((MyX >= MIN_L) & (MyX <= MIN_R))
                 {
                     // Minimize our form
                     this.WindowState = FormWindowState.Minimized;
                 }
 
-                if ((myX >= MAX_L) & (myX <= MAX_R))
+                if ((MyX >= MAX_L) & (MyX <= MAX_R))
                 {
                     //Are we already maximized? If so not then MAXIMIZE it and set our boolean for future usage
                     if (isMaximized == false)   
@@ -542,34 +544,43 @@ namespace AtomTerminal
                     }
                 }
 
-                if ((myX >= CLOSE_L) & (myX <= CLOSE_R))
+                if ((MyX >= CLOSE_L) & (MyX <= CLOSE_R))
                 {
                     //Close was pressed... ask user if they want to leave. If so then leave
                     if (MessageBox.Show("Are you sure?", "Exiting", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        this.Dispose();
                         this.Close();
+                    }
                 }
 
                 //Set our original image to picturebox 
-                myCTRLBOX.Image = OrigCtrl;
+                MyCTRLBOX.Image = OrigCtrl;
             }
         }
 
-        private void lblTitle_MouseDown(object sender, MouseEventArgs e)
+        
+        private void LblTitle_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                int MyHRESULT = SendMessage(Handle, WMNCLBUTTONDOWN, HTCAPTION, 0);
+                if (MyHRESULT > 0)
+                {
+                    string MyInfo = "HRESULT Error: " + Convert.ToString(MyHRESULT);
+                    MessageBox.Show(MyInfo, "Tell AtomSoftTech");
+                }
             }
         }
 
 
-        private void myCTRLBOX_MouseLeave(object sender, EventArgs e)
+        private void MyCTRLBOX_MouseLeave(object sender, EventArgs e)
         {
-            myCTRLBOX.Image = Properties.Resources.ControlBox;
+            MyCTRLBOX.Image = Properties.Resources.ControlBox;
         }
 
-        private void lblTitle_DoubleClick(object sender, EventArgs e)
+        private void LblTitle_DoubleClick(object sender, EventArgs e)
         {
             //IDK WHY THIS DOESNT WORK
             if (isMaximized == false)
@@ -584,85 +595,85 @@ namespace AtomTerminal
             }
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void BtnOpen_Click(object sender, EventArgs e)
         {
             if (isSerialOpen == false)
             {
                 try
                 {
-                    mySerialPort.PortName = cmbPorts.Text;
-                    mySerialPort.BaudRate = Convert.ToInt32(cmbBaud.Text);
-                    mySerialPort.DataBits = Convert.ToInt32(cmbBits.Text);
+                    MySerialPort.PortName = CmbPorts.Text;
+                    MySerialPort.BaudRate = Convert.ToInt32(CmbBaud.Text);
+                    MySerialPort.DataBits = Convert.ToInt32(CmbBits.Text);
 
-                    switch (cmbStop.Text)
+                    switch (CmbStop.Text)
                     {
                         case "0":
-                            mySerialPort.StopBits = StopBits.None;
+                            MySerialPort.StopBits = StopBits.None;
                             break;
                         case "1":
-                            mySerialPort.StopBits = StopBits.One;
+                            MySerialPort.StopBits = StopBits.One;
                             break;
                         case "1.5":
-                            mySerialPort.StopBits = StopBits.OnePointFive;
+                            MySerialPort.StopBits = StopBits.OnePointFive;
                             break;
                         case "2":
-                            mySerialPort.StopBits = StopBits.Two;
+                            MySerialPort.StopBits = StopBits.Two;
                             break;
                         default:
-                            mySerialPort.StopBits = StopBits.One;
+                            MySerialPort.StopBits = StopBits.One;
                             break;
                     }
 
-                    switch (cmbParity.Text)
+                    switch (CmbParity.Text)
                     {
                         case "None":
-                            mySerialPort.Parity = Parity.None;
+                            MySerialPort.Parity = Parity.None;
                             break;
                         case "Odd":
-                            mySerialPort.Parity = Parity.Odd;
+                            MySerialPort.Parity = Parity.Odd;
                             break;
                         case "Even":
-                            mySerialPort.Parity = Parity.Even;
+                            MySerialPort.Parity = Parity.Even;
                             break;
                         case "Mark":
-                            mySerialPort.Parity = Parity.Mark;
+                            MySerialPort.Parity = Parity.Mark;
                             break;
                         case "Space":
-                            mySerialPort.Parity = Parity.Space;
+                            MySerialPort.Parity = Parity.Space;
                             break;
                         default:
-                            mySerialPort.Parity = Parity.None;
+                            MySerialPort.Parity = Parity.None;
                             break;
                     }
 
-                    switch (cmbFlow.Text)
+                    switch (CmbFlow.Text)
                     {
                         case "None":
-                            mySerialPort.Handshake = Handshake.None;
+                            MySerialPort.Handshake = Handshake.None;
                             break;
                         case "RTS / CTS":
-                            mySerialPort.Handshake = Handshake.RequestToSend;
-                            mySerialPort.RtsEnable = true;
+                            MySerialPort.Handshake = Handshake.RequestToSend;
+                            MySerialPort.RtsEnable = true;
                             break;
                         case "DTR / DSR":
-                            mySerialPort.Handshake = Handshake.None;
-                            mySerialPort.DtrEnable = true;
+                            MySerialPort.Handshake = Handshake.None;
+                            MySerialPort.DtrEnable = true;
                             break;
                         default:
-                            mySerialPort.Handshake = Handshake.None;
+                            MySerialPort.Handshake = Handshake.None;
                             break;
 
                     }
 
-                    mySerialPort.Open();
-                    btnOpen.Text = "Close";
+                    MySerialPort.Open();
+                    BtnOpen.Text = "Close";
                     isSerialOpen = true;
-                    lblTitle.Text = "AtomTerminal -> PORT: " + mySerialPort.PortName + " - " + cmbBaud.Text + " - " + cmbParity.Text + " - " + cmbStop.Text;
+                    LblTitle.Text = "AtomTerminal -> PORT: " + MySerialPort.PortName + " - " + CmbBaud.Text + " - " + CmbParity.Text + " - " + CmbStop.Text;
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    lblTitle.Text = "AtomTerminal - No Connection";
-                    btnOpen.Text = "Connect";
+                    LblTitle.Text = "AtomTerminal - No Connection";
+                    BtnOpen.Text = "Connect";
                     isSerialOpen = false;
                     MessageBox.Show("Com port is in Open elsewhere.", "Oops!");
                     Debug.WriteLine("COM PORT CONNECT ERROR: .\n\r" + ex.ToString());
@@ -670,26 +681,26 @@ namespace AtomTerminal
             }
             else
             {
-                mySerialPort.Close();
-                lblTitle.Text = "AtomTerminal - No Connection";
-                btnOpen.Text = "Connect";
+                MySerialPort.Close();
+                LblTitle.Text = "AtomTerminal - No Connection";
+                BtnOpen.Text = "Connect";
                 isSerialOpen = false;
             }
         }
-        public byte[] addByteToArray(byte[] bArray, byte newByte)
+        private static byte[] AddByteToArray(byte[] bArray, byte newByte)
         {
-            int myNewLen = bArray.Length + 1;
-            int myNewIndex = myNewLen - 1;
+            int MyNewLen = bArray.Length + 1;
+            int MyNewIndex = MyNewLen - 1;
 
-            byte[] newArray = new byte[myNewLen];
+            byte[] newArray = new byte[MyNewLen];
             bArray.CopyTo(newArray, 0);
-            newArray[myNewIndex] = newByte;
+            newArray[MyNewIndex] = newByte;
             return newArray;
         }
-        private void txtTerm_TextChanged(object sender, EventArgs e)
+        private void TxtTerm_TextChanged(object sender, EventArgs e)
         {
-            txtTerm.SelectionStart = txtTerm.Text.Length;
-            txtTerm.ScrollToCaret();
+            TxtTerm.SelectionStart = TxtTerm.Text.Length;
+            TxtTerm.ScrollToCaret();
         }
 
         //Created a super simple structure here to help with returning data
@@ -699,14 +710,15 @@ namespace AtomTerminal
             public bool passed;
         }
 
-        Hexstr2bytes HexString2ByteArray(string myInputHexStr)
+        Hexstr2bytes HexString2ByteArray(string MyInputHexStr)
         {
-            Hexstr2bytes myReturn = new Hexstr2bytes();
-
-            myReturn.passed = false;
+            Hexstr2bytes MyReturn = new Hexstr2bytes
+            {
+                passed = false
+            };
 
             //Split the string by spaces
-            string[] hexValuesSplit = myInputHexStr.Split(' ');
+            string[] hexValuesSplit = MyInputHexStr.Split(' ');
 
             //create a new array to hold the byte data. same length as the split from above
             byte[] hexArray = new byte[hexValuesSplit.Length];
@@ -730,12 +742,13 @@ namespace AtomTerminal
                 //little test to ensure the tempHex is valid number and not weird stuff
                 try
                 {
-                    int result = int.Parse(tempHex);
+                    UInt32 result = Convert.ToUInt32(tempHex, 16);
                 }
-                catch
+                catch(FormatException fe)
                 {
                     MessageBox.Show(tempHex + " is not a valid entry.", "Failed: Bad Hex");
-                    return myReturn;
+                    Debug.WriteLine("Error: " + fe.ToString());
+                    return MyReturn;
                 }
 
 
@@ -747,12 +760,12 @@ namespace AtomTerminal
             }
 
             // return our new array of bytes
-            myReturn.passed = true;
-            myReturn.hexArray = hexArray;
-            return myReturn;
+            MyReturn.passed = true;
+            MyReturn.hexArray = hexArray;
+            return MyReturn;
         }
 
-        private void btnSend_Click(object sender, EventArgs e)
+        private void BtnSend_Click(object sender, EventArgs e)
         {
             //if serial isnt connected then leave
             if (isSerialOpen == false)
@@ -766,7 +779,7 @@ namespace AtomTerminal
 
             byte[] Data2Bytes;
 
-            if (chkHex.Checked == false)
+            if (ChkHex.Checked == false)
             {
                 //if this is simply text convert to bytes easy way
                 Data2Bytes = Encoding.ASCII.GetBytes(Data2Send);
@@ -793,42 +806,42 @@ namespace AtomTerminal
             byte NL = 0x0A;
             byte CR = 0x0D;
 
-            if (chkNL.Checked == true)
+            if (ChkNL.Checked == true)
             {
                 //if newline (NL) checkbox is checked then add to end
-                Data2Bytes = addByteToArray(Data2Bytes, NL);
+                Data2Bytes = AddByteToArray(Data2Bytes, NL);
             }
 
-            if (chkCR.Checked == true)
+            if (ChkCR.Checked == true)
             {
                 //if Carriage Return (CR) checkbox is checked then add to end
-                Data2Bytes = addByteToArray(Data2Bytes, CR);
+                Data2Bytes = AddByteToArray(Data2Bytes, CR);
             }
 
             //Send the array out through port
-            mySerialPort.Write(Data2Bytes, 0, Data2Bytes.Length);
+            MySerialPort.Write(Data2Bytes, 0, Data2Bytes.Length);
 
             //if echo is on then print to our screen also
-            if (chkEcho.Checked == true)
+            if (ChkEcho.Checked == true)
             {
-                string myEcho = "\n\rAtomEcho: " + txtSend.Text;
-                txtTerm.Text += myEcho;
+                string MyEcho = "\n\rAtomEcho: " + txtSend.Text;
+                TxtTerm.Text += MyEcho;
 
-                if (chkEchoLog.Checked == true)
+                if (ChkEchoLog.Checked == true)
                 {
                     if (radLogTxt.Checked == true)
                     {
                         using (StreamWriter sw = File.AppendText(LogFileLocation))
                         {
-                            sw.WriteLine(myEcho);
+                            sw.WriteLine(MyEcho);
                         }
                     }
                     if (radLogBin.Checked == true)
                     {
                         using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                         {
-                            byte[] myByteData = Encoding.ASCII.GetBytes(myEcho);
-                            writer.Write(myByteData);
+                            byte[] MyByteData = Encoding.ASCII.GetBytes(MyEcho);
+                            writer.Write(MyByteData);
                         }
                     }
                 }
@@ -836,30 +849,35 @@ namespace AtomTerminal
             }
         }
 
-        private void chkEnLog_CheckedChanged(object sender, EventArgs e)
+        private void ChkEnLog_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkEnLog.Checked == true)
+            if (ChkEnLog.Checked == true)
             {
-                string myFilter = "";
+                string MyFilter;
 
                 if (radLogBin.Checked == true)
-                    myFilter = "Binary|*.bin";
+                    MyFilter = "Binary|*.bin";
                 else
-                    myFilter = "Text File|*.txt";
+                    MyFilter = "Text File|*.txt";
 
-                SaveFileDialog myLogFile = new SaveFileDialog();
-                myLogFile.Filter = myFilter;
-                myLogFile.Title = "Choose file to save Log";
-                myLogFile.ShowDialog();
-
-                if (myLogFile.FileName.Length < 1)
+                SaveFileDialog MyLogFile = new SaveFileDialog
                 {
-                    chkEnLog.Checked = false;
+                    Filter = MyFilter,
+                    Title = "Choose file to save Log"
+                };
+                MyLogFile.ShowDialog();
+
+                if (MyLogFile.FileName.Length < 1)
+                {
+                    ChkEnLog.Checked = false;
                     LogFileLocation = "";
-                    lblLogFile.Text = "Log File: NA";
+                    LblLogFile.Text = "Log File: NA";
+                    MyLogFile.Dispose();
                     return;
                 }
-                LogFileLocation = myLogFile.FileName;
+                LogFileLocation = MyLogFile.FileName;
+
+                MyLogFile.Dispose();
 
                 if (radLogTxt.Checked == true)
                 {
@@ -879,51 +897,51 @@ namespace AtomTerminal
                     {
                         using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                         {
-                            byte[] myPad= new byte[2];
-                            myPad[0] = 0xFF;
-                            myPad[1] = 0xFF;
+                            byte[] MyPad= new byte[2];
+                            MyPad[0] = 0xFF;
+                            MyPad[1] = 0xFF;
 
-                            writer.Write(myPad);
+                            writer.Write(MyPad);
                             writer.Write("AtomTerminal Log: " + DateTime.Now.ToString() + "\n\r");
-                            writer.Write(myPad);
+                            writer.Write(MyPad);
                         }
                     }
                 }
-                lblLogFile.Text = "Log File: " + LogFileLocation;
+                LblLogFile.Text = "Log File: " + LogFileLocation;
             }
             else
             {
-                chkEnLog.Checked = false;
+                ChkEnLog.Checked = false;
                 LogFileLocation = "";
-                lblLogFile.Text = "Log File: NA";
+                LblLogFile.Text = "Log File: NA";
             }
         }
 
-        private void chkEchoLog_CheckedChanged(object sender, EventArgs e)
+        private void ChkEchoLog_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkEchoLog.Checked == false)
+            if (ChkEchoLog.Checked == false)
                 return;
 
-            if (chkEcho.Checked == false)
+            if (ChkEcho.Checked == false)
             {
 
                 if (MessageBox.Show("Enaable Echo to Screen?", "Set Echo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    chkEcho.Checked = true;
+                    ChkEcho.Checked = true;
                 }
 
             }
         }
 
-        private void myCTRLBOX_Click(object sender, EventArgs e)
+        private void MyCTRLBOX_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnSendFile_Click(object sender, EventArgs e)
+        private void BtnSendFile_Click(object sender, EventArgs e)
         {
-            string myTextFile = "";
-            byte[] myBinaryFile;
+            string MyTextFile = "";
+            byte[] MyBinaryFile;
 
             //if serial isnt connected then leave
             if (isSerialOpen == false)
@@ -935,60 +953,73 @@ namespace AtomTerminal
             //Send a text file
             if (radOpenTxt.Checked == true)
             {
-                OpenFileDialog ofdText = new OpenFileDialog();
-                ofdText.Filter = "Text File|*.txt";
-                ofdText.Title = "Open Text File";
+                OpenFileDialog ofdText = new OpenFileDialog
+                {
+                    Filter = "Text File|*.txt",
+                    Title = "Open Text File"
+                };
                 ofdText.ShowDialog();
 
-                String myTextFilename = ofdText.FileName;
+                String MyTextFilename = ofdText.FileName;
 
-                if (myTextFilename.Length < 1)
+                if (MyTextFilename.Length < 1)
+                {
+                    ofdText.Dispose();
                     return;
+                }
 
-                myTextFile = System.IO.File.ReadAllText(myTextFilename);
-                mySerialPort.Write(myTextFile);
+                ofdText.Dispose();
+
+                MyTextFile = System.IO.File.ReadAllText(MyTextFilename);
+                MySerialPort.Write(MyTextFile);
             }
 
             //Send a binary file
             if (radOpenBin.Checked == true)
             {
-                OpenFileDialog ofdText = new OpenFileDialog();
-                ofdText.Filter = "All Files|*.*";
-                ofdText.Title = "Open Binary File";
+                OpenFileDialog ofdText = new OpenFileDialog
+                {
+                    Filter = "All Files|*.*",
+                    Title = "Open Binary File"
+                };
                 ofdText.ShowDialog();
 
-                String myBinaryFilename = ofdText.FileName;
+                String MyBinaryFilename = ofdText.FileName;
 
-                if (myBinaryFilename.Length < 1)
+                if (MyBinaryFilename.Length < 1)
+                {
+                    ofdText.Dispose();
                     return;
+                }
 
-                myBinaryFile = File.ReadAllBytes(myBinaryFilename);
-                mySerialPort.Write(myBinaryFile, 0, myBinaryFile.Length);
-                myTextFile = Encoding.ASCII.GetString(myBinaryFile);
+                ofdText.Dispose();
+                MyBinaryFile = File.ReadAllBytes(MyBinaryFilename);
+                MySerialPort.Write(MyBinaryFile, 0, MyBinaryFile.Length);
+                MyTextFile = Encoding.ASCII.GetString(MyBinaryFile);
                 
             }
 
             //if echo is on then print to our screen also
-            if (chkEcho.Checked == true)
+            if (ChkEcho.Checked == true)
             {
-                string myEcho = "\n\rAtomEcho: " + myTextFile;
-                txtTerm.Text += myEcho;
+                string MyEcho = "\n\rAtomEcho: " + MyTextFile;
+                TxtTerm.Text += MyEcho;
 
-                if (chkEchoLog.Checked == true)
+                if (ChkEchoLog.Checked == true)
                 {
                     if (radLogTxt.Checked == true)
                     {
                         using (StreamWriter sw = File.AppendText(LogFileLocation))
                         {
-                            sw.WriteLine(myEcho);
+                            sw.WriteLine(MyEcho);
                         }
                     }
                     if (radLogBin.Checked == true)
                     {
                         using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
                         {
-                            byte[] myByteData = Encoding.ASCII.GetBytes(myEcho);
-                            writer.Write(myByteData);
+                            byte[] MyByteData = Encoding.ASCII.GetBytes(MyEcho);
+                            writer.Write(MyByteData);
                         }
                     }
                 }
@@ -997,69 +1028,70 @@ namespace AtomTerminal
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        
+        private void Button1_Click(object sender, EventArgs e)
         {
-            if (txtTerm.Text.Length > 0)
+            if (TxtTerm.Text.Length > 0)
             {
                 if(MessageBox.Show("Are you sure?","Clear Terminal",MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    txtTerm.Text = "";
+                    TxtTerm.Text = "";
                 }      
             }
         }
 
-        private void btnSM_Click(object sender, EventArgs e)
+        private void BtnSM_Click(object sender, EventArgs e)
         {
-            float newSize = txtTerm.Font.Size;
+            float newSize = TxtTerm.Font.Size;
 
             if (newSize > 3)
                 newSize--;
 
-            txtTerm.Font = new Font(txtTerm.Font.Name, newSize,
-                txtTerm.Font.Style, txtTerm.Font.Unit);
+            TxtTerm.Font = new Font(TxtTerm.Font.Name, newSize,
+                TxtTerm.Font.Style, TxtTerm.Font.Unit);
         }
 
-        private void btnLG_Click(object sender, EventArgs e)
+        private void BtnLG_Click(object sender, EventArgs e)
         {
-            float newSize = txtTerm.Font.Size;
+            float newSize = TxtTerm.Font.Size;
 
             if (newSize < 22)
                 newSize++;
 
-            txtTerm.Font = new Font(txtTerm.Font.Name, newSize,
-                txtTerm.Font.Style, txtTerm.Font.Unit);
+            TxtTerm.Font = new Font(TxtTerm.Font.Name, newSize,
+                TxtTerm.Font.Style, TxtTerm.Font.Unit);
         }
 
-        private void btnBGColor_Click(object sender, EventArgs e)
+        private void BtnBGColor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                Color myChosenColor = colorDialog1.Color;
-                txtTerm.BackColor = myChosenColor;
+                Color MyChosenColor = colorDialog1.Color;
+                TxtTerm.BackColor = MyChosenColor;
             }
         }
 
-        private void btnFGColor_Click(object sender, EventArgs e)
+        private void BtnFGColor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                Color myChosenColor = colorDialog1.Color;
-                txtTerm.ForeColor = myChosenColor;
+                Color MyChosenColor = colorDialog1.Color;
+                TxtTerm.ForeColor = MyChosenColor;
             }
         }
 
         
-        private void btnBold_Click(object sender, EventArgs e)
+        private void BtnBold_Click(object sender, EventArgs e)
         {
-            bool isBold = txtTerm.Font.Bold;
+            bool isBold = TxtTerm.Font.Bold;
 
             if (isBold)
             {  
-                txtTerm.Font = new Font(txtTerm.Font.Name, txtTerm.Font.Size, FontStyle.Regular, txtTerm.Font.Unit);
+                TxtTerm.Font = new Font(TxtTerm.Font.Name, TxtTerm.Font.Size, FontStyle.Regular, TxtTerm.Font.Unit);
             }
             else
             {
-                txtTerm.Font = new Font(txtTerm.Font.Name, txtTerm.Font.Size, FontStyle.Bold, txtTerm.Font.Unit);
+                TxtTerm.Font = new Font(TxtTerm.Font.Name, TxtTerm.Font.Size, FontStyle.Bold, TxtTerm.Font.Unit);
             }
         }
     }

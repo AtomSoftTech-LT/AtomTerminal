@@ -17,7 +17,7 @@
     <resheader name="version">2.0</resheader>
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Name1"><value>this is My long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="myCTRLBOX.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="MyCTRLBOX.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGMAAAAYCAYAAADu3kOXAAABg2lDQ1BJQ0MgcHJvZmlsZQAAKM+VkUso
         RFEcxn/zEIkszEKyuIthZUpIstIQKVMaowwW7r1jhpp7TfeObCyVrbLw2HgtbKzZWtgqpTxKVpZWxEa6
@@ -135,7 +135,7 @@
         oxGW0QjLaMN2fAAuD7UFwKEyYgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="mySerialPort.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="MySerialPort.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -171,7 +171,7 @@
         FRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRseGhwsJyAwKiEqJR8fGh0cFxsbFhscFxsgGx0nIh8u
         KSAoIx8iHR4kIB4vKiAxLCEwKyErJh8gHB0cFxsaFRsaFRsbFhseGhwsJyAxLCEuKSAdGBwbFhsaFRsa
         FRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRscGBszLiNgWjVm
-        XzZRSy4jHx8bFxsaFRsaFRsfGhwoJCAyLCIvKyNKQytjWzVoYTdmYDZUTS8xLCIgGxwbFhwaFRsaFRsb
+        XzZRSy4jHx8bFxsaFRsaFRsfGhwoJCAyLCIvKyNKQytjWzVoYTdMyDZUTS8xLCIgGxwbFhwaFRsaFRsb
         FhwqJCFaUzFoYTddVzIkIB8cGBsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsaFRsa
         FRsaFRsaFRsaFRsaFRsdFx03MSZsYzt0az1dVjIjIB8cFxwaFRsaFRsaFRsaFhscGRtMRi1pYTl4cD52
         bj1gWDRAOiccGBsbFhsaFRsaFRsaFRscFxwuKSNoXzd3bz5qYzgnIyAcGBsaFRsaFRsaFRsaFRsaFRsa

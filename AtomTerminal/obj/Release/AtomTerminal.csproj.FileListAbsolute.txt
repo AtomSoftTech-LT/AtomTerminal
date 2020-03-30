@@ -1,0 +1,15 @@
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Release\AtomTerminal.exe.config
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Release\AtomTerminal.exe.manifest
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Release\AtomTerminal.application
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Release\AtomTerminal.exe
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\bin\Release\AtomTerminal.pdb
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.main.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.Properties.Resources.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.splash.resources
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.csproj.GenerateResource.cache
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.csproj.CoreCompileInputs.cache
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.TrustInfo.xml
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.exe.manifest
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.application
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.exe
+C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Release\AtomTerminal.pdb
