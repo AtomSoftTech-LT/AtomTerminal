@@ -8,4 +8,3 @@ C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csp
 C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csproj.CoreCompileInputs.cache
 C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.exe
 C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.pdb
-C:\Users\Jason\source\repos\AtomTerminal\AtomTerminal\obj\Debug\AtomTerminal.csprojAssemblyReference.cache
