@@ -18,7 +18,8 @@ namespace AtomTerminal
     {
         private bool isMaximized = false;
         private bool isSerialOpen = false;
-        
+        private bool LoadedAST = false;
+
         string LogFileLocation = "";
 
         
@@ -125,8 +126,191 @@ namespace AtomTerminal
             CmbPorts.Text = CmbPorts.Items[0].ToString();
         }
 
+        private bool IsItAtom ()
+        {
+            bool isItNot = true; 
+            var cmdArgs = Environment.GetCommandLineArgs();
+
+            if (cmdArgs.Length > 1)
+            {
+                if (cmdArgs[1] == "atomDev")
+                {
+                    isItNot = false;
+                    if (cmdArgs.Length == 2)
+                        return isItNot;
+
+                    if (cmdArgs[2].EndsWith("ast", true, null) == true)
+                    {
+                        LoadAST(cmdArgs[2]);
+                    }
+                }
+
+                if (cmdArgs[1].EndsWith("ast", true, null) == true)
+                {
+                    LoadAST(cmdArgs[1]);
+                }
+            }
+            return isItNot;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1304:Specify CultureInfo", Justification = "<Pending>")]
+        private void LoadAST(string theASTFile)
+        {
+            //Open AST file as text loop through each line adjust AtomTerminal
+            if (!File.Exists(theASTFile))
+                return;
+
+            using (StreamReader sr = File.OpenText(theASTFile))
+            {
+                string myLine = "";
+                while ((myLine = sr.ReadLine()) != null)
+                {
+                    char[] splitBy = { ':' };
+
+                    string[] lineSplit = myLine.Split(splitBy);
+                    string mySetting = lineSplit[0].ToLower();
+                    string myValue = lineSplit[1];
+                    
+                    switch (mySetting)
+                    {
+                        case "port":
+                            myValue = myValue.ToUpper();
+                            CmbPorts.Text = myValue;
+                            LoadedAST = true;
+                            break;
+                        case "baud":
+                            CmbBaud.Text = myValue;
+                            break;
+                        case "bits":
+                            CmbBits.Text = myValue;
+                            break;
+                        case "parity":
+                            CmbParity.Text = myValue;
+                            break;
+                        case "stop":
+                            CmbStop.Text = myValue;
+                            break;
+                        case "flow":
+                            CmbFlow.Text = myValue;
+                            break;
+                        case "log":
+                            ChkEnLog.Checked = false;
+                            if(myValue.ToLower() == "yes")
+                                ChkEnLog.Checked = true;
+                            break;
+                        case "logecho":
+                            ChkEchoLog.Checked = false;
+                            if (myValue.ToLower() == "yes")
+                                ChkEchoLog.Checked = true;
+                            break;
+                        case "logbintext":
+                            radLogTxt.Checked = true;
+                            if (myValue.ToLower() == "bin")
+                            {
+                                radLogTxt.Checked = false;
+                                radLogBin.Checked = true;
+                            }
+                            break;
+                        case "logfile":
+                            LogFileLocation = myValue;
+                            SetLogFile();                            
+                            break;
+                        case "newline":
+                            ChkNL.Checked = false;
+                            if (myValue.ToLower() == "yes")
+                                ChkNL.Checked = true;
+                            break;
+                        case "return":
+                            ChkCR.Checked = false;
+                            if (myValue.ToLower() == "yes")
+                                ChkCR.Checked = true;
+                            break;
+                        case "view":
+                            radHex.Checked = false;
+                            radHexAscii.Checked = false;
+                            radASCII.Checked = false;
+
+                            switch (myValue.ToLower())
+                            {
+                                case "hex":
+                                    radHex.Checked = true;
+                                    break;
+                                case "hexascii":
+                                    radHexAscii.Checked = true;
+                                    break;
+                                case "ascii":
+                                    radASCII.Checked = true;
+                                    break;
+                            }
+                            break;
+                        case "echo":
+                            ChkEcho.Checked = false;
+                            if (myValue.ToLower() == "yes")
+                                ChkEcho.Checked = true;
+                            break;
+                        case "textsize":
+                            try
+                            {
+                                int newFontSize = Convert.ToInt32(myValue);
+                                TxtTerm.Font = new Font(TxtTerm.Font.Name, newFontSize, TxtTerm.Font.Style, TxtTerm.Font.Unit);
+                            }
+                            catch (FormatException ex) { }
+                            break;
+                        case "bgcolor":
+                            try
+                            {
+                                string[] myBGColorSplitRGB = myValue.Split(',');
+
+                                int myR = Convert.ToInt32(myBGColorSplitRGB[0]);
+                                int myB = Convert.ToInt32(myBGColorSplitRGB[1]);
+                                int myG = Convert.ToInt32(myBGColorSplitRGB[2]);                                
+
+                                Color NewBGColor = new Color();
+                                NewBGColor = Color.FromArgb(myR, myG, myB);
+
+                                TxtTerm.BackColor = NewBGColor;
+                            }
+                            catch (Exception ex)
+                            {
+                                //MessageBox.Show("BAD BG COLOR!");
+                            }
+                            break;
+                        case "fgcolor":
+                            
+                            try
+                            {
+                                string[] myBGColorSplitRGB = myValue.Split(',');
+
+                                int myR = Convert.ToInt32(myBGColorSplitRGB[0]);
+                                int myB = Convert.ToInt32(myBGColorSplitRGB[1]);
+                                int myG = Convert.ToInt32(myBGColorSplitRGB[2]);
+
+                                Color NewBGColor = new Color();
+                                NewBGColor = Color.FromArgb(myR, myG, myB);
+
+                                TxtTerm.ForeColor = NewBGColor;
+                            }
+                            catch (Exception ex)
+                            {
+                                //MessageBox.Show("BAD FG COLOR!");
+                            }
+                            break;
+                        case "bold":
+                            if (myValue.ToLower() == "yes")
+                            {
+                                TxtTerm.Font = new Font(TxtTerm.Font.Name, TxtTerm.Font.Size, FontStyle.Bold, TxtTerm.Font.Unit);
+                            }
+                            break;
+
+                    }
+                }
+            }
+        }
+
         private void Main_Load(object sender, EventArgs e)
         {
+            bool showSplash = IsItAtom();
+
             //used to jump thread, for adding data received from serial port
             this.MyDelegate = new AddDataDelegate(AddDataMethod);
 
@@ -143,7 +327,10 @@ namespace AtomTerminal
             MySplash.Show();
 
             //Show it for 3 seconds or less
-            Thread.Sleep(1500); //1.5 seconds (1 second, 500 miliseconds)
+            if (showSplash == true)
+            {
+                Thread.Sleep(1500); //1.5 seconds (1 second, 500 miliseconds)
+            }
 
             //Close the splash screen
             MySplash.Close();
@@ -152,7 +339,11 @@ namespace AtomTerminal
             this.Visible = true;
 
             //Call getPorts to load our com ports.
-            GetPorts();
+            if(LoadedAST == false)
+                GetPorts();
+
+            //Just in case
+            LoadedAST = false;
 
             //do a initial resize to load locations of controls
             GroupResize();
@@ -851,70 +1042,7 @@ namespace AtomTerminal
 
         private void ChkEnLog_CheckedChanged(object sender, EventArgs e)
         {
-            if (ChkEnLog.Checked == true)
-            {
-                string MyFilter;
-
-                if (radLogBin.Checked == true)
-                    MyFilter = "Binary|*.bin";
-                else
-                    MyFilter = "Text File|*.txt";
-
-                SaveFileDialog MyLogFile = new SaveFileDialog
-                {
-                    Filter = MyFilter,
-                    Title = "Choose file to save Log"
-                };
-                MyLogFile.ShowDialog();
-
-                if (MyLogFile.FileName.Length < 1)
-                {
-                    ChkEnLog.Checked = false;
-                    LogFileLocation = "";
-                    LblLogFile.Text = "Log File: NA";
-                    MyLogFile.Dispose();
-                    return;
-                }
-                LogFileLocation = MyLogFile.FileName;
-
-                MyLogFile.Dispose();
-
-                if (radLogTxt.Checked == true)
-                {
-                    if (!File.Exists(LogFileLocation))
-                    {
-                        // Create a file to write to.
-                        using (StreamWriter sw = File.CreateText(LogFileLocation))
-                        {
-                            sw.WriteLine("AtomTerminal Log: " + DateTime.Now.ToString() + "\n\r");
-                        }
-                    }
-                }
-
-                if (radLogBin.Checked == true)
-                {
-                    if (!File.Exists(LogFileLocation))
-                    {
-                        using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
-                        {
-                            byte[] MyPad= new byte[2];
-                            MyPad[0] = 0xFF;
-                            MyPad[1] = 0xFF;
-
-                            writer.Write(MyPad);
-                            writer.Write("AtomTerminal Log: " + DateTime.Now.ToString() + "\n\r");
-                            writer.Write(MyPad);
-                        }
-                    }
-                }
-                LblLogFile.Text = "Log File: " + LogFileLocation;
-            }
-            else
-            {
-                ChkEnLog.Checked = false;
-                LogFileLocation = "";
-                LblLogFile.Text = "Log File: NA";
-            }
+            
         }
 
         private void ChkEchoLog_CheckedChanged(object sender, EventArgs e)
@@ -1093,6 +1221,210 @@ namespace AtomTerminal
             {
                 TxtTerm.Font = new Font(TxtTerm.Font.Name, TxtTerm.Font.Size, FontStyle.Bold, TxtTerm.Font.Unit);
             }
+        }
+
+        private void SetLogFile()
+        {
+            if (radLogTxt.Checked == true)
+            {
+                if (!File.Exists(LogFileLocation))
+                {
+                    // Create a file to write to.
+                    using (StreamWriter sw = File.CreateText(LogFileLocation))
+                    {
+                        sw.WriteLine("AtomTerminal Log: " + DateTime.Now.ToString() + "\n\r");
+                    }
+                }
+            }
+
+            if (radLogBin.Checked == true)
+            {
+                if (!File.Exists(LogFileLocation))
+                {
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(LogFileLocation, FileMode.Create)))
+                    {
+                        byte[] MyPad = new byte[2];
+                        MyPad[0] = 0xFF;
+                        MyPad[1] = 0xFF;
+
+                        writer.Write(MyPad);
+                        writer.Write("AtomTerminal Log: " + DateTime.Now.ToString() + "\n\r");
+                        writer.Write(MyPad);
+                    }
+                }
+            }
+            LblLogFile.Text = "Log File: " + LogFileLocation;
+        }
+
+        private void ChkEnLog_Click(object sender, EventArgs e)
+        {
+            if (ChkEnLog.Checked == true)
+            {
+                string MyFilter;
+
+                if (radLogBin.Checked == true)
+                    MyFilter = "Binary|*.bin";
+                else
+                    MyFilter = "Text File|*.txt";
+
+                SaveFileDialog MyLogFile = new SaveFileDialog
+                {
+                    Filter = MyFilter,
+                    Title = "Choose file to save Log"
+                };
+                MyLogFile.ShowDialog();
+
+                if (MyLogFile.FileName.Length < 1)
+                {
+                    ChkEnLog.Checked = false;
+                    LogFileLocation = "";
+                    LblLogFile.Text = "Log File: NA";
+                    MyLogFile.Dispose();
+                    return;
+                }
+                LogFileLocation = MyLogFile.FileName;
+
+                MyLogFile.Dispose();
+                SetLogFile();
+            }
+            else
+            {
+                ChkEnLog.Checked = false;
+                LogFileLocation = "";
+                LblLogFile.Text = "Log File: NA";
+            }
+        }
+
+        private void btnOpenAST_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdText = new OpenFileDialog
+            {
+                Filter = "AST File|*.ast",
+                Title = "Open AtomSoft Terminal Config"
+            };
+            ofdText.ShowDialog();
+
+            String MyTextFilename = ofdText.FileName;
+
+            if (MyTextFilename.Length < 1)
+            {
+                ofdText.Dispose();
+                return;
+            }
+
+            ofdText.Dispose();
+            LoadAST(MyTextFilename);
+        }
+
+        private void btnSaveAST_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog MyLogFile = new SaveFileDialog
+            {
+                Filter = "AST File|*.ast",
+                Title = "Save AtomSoft Terminal Config"
+            };
+            MyLogFile.ShowDialog();
+
+            if (MyLogFile.FileName.Length < 1)
+            {
+                MyLogFile.Dispose();
+                return;
+            }
+
+            String MyTextFilename = MyLogFile.FileName;
+
+            MyLogFile.Dispose();
+
+            if (File.Exists(MyTextFilename))
+            {
+                //DELETE FILE
+                File.Delete(MyTextFilename);
+            }
+
+            // Create the file.
+            using (StreamWriter sw = File.CreateText(MyTextFilename))
+            {
+                string myBinTxt = "";
+                string myCheck = "";
+                string myView = "";
+                string myBold = "";
+                string myFGColor = TxtTerm.ForeColor.R.ToString() + "," + TxtTerm.ForeColor.B.ToString() + "," + TxtTerm.ForeColor.G.ToString();
+                string myBGColor = TxtTerm.BackColor.R.ToString() + "," + TxtTerm.BackColor.B.ToString() + "," + TxtTerm.BackColor.G.ToString();
+
+                sw.WriteLine("port:" + CmbPorts.Text);
+                sw.WriteLine("baud:" + CmbBaud.Text);
+                sw.WriteLine("bits:" + CmbBits.Text);
+                sw.WriteLine("parity:" + CmbParity.Text);
+                sw.WriteLine("stop:" + CmbStop.Text);
+                sw.WriteLine("flow:" + CmbFlow.Text);
+
+                if (ChkEnLog.Checked == true)
+                    myCheck = "yes";
+                else
+                    myCheck = "no";
+
+                sw.WriteLine("log:" + myCheck);
+
+                if (ChkEchoLog.Checked == true)
+                    myCheck = "yes";
+                else
+                    myCheck = "no";
+
+                sw.WriteLine("logecho:" + myCheck);
+
+                if (radLogBin.Checked == true)
+                    myBinTxt = "binary";
+                else
+                    myBinTxt = "text";
+
+                sw.WriteLine("logbintxt:" + myBinTxt);
+                sw.WriteLine("logfile:" + LogFileLocation);
+
+                if (ChkNL.Checked == true)
+                    myCheck = "yes";
+                else
+                    myCheck = "no";
+
+                sw.WriteLine("newline:" + myCheck);
+
+                if (ChkCR.Checked == true)
+                    myCheck = "yes";
+                else
+                    myCheck = "no";
+
+                sw.WriteLine("return:" + myCheck);
+
+                if (radHex.Checked == true)
+                    myView = "hex";
+
+                if (radHexAscii.Checked == true)
+                    myView = "hexascii";
+
+
+                if (radASCII.Checked == true)
+                    myView = "ascii";
+
+                sw.WriteLine("view:" + myView);
+
+                if (ChkEcho.Checked == true)
+                    myCheck = "yes";
+                else
+                    myCheck = "no";
+
+                sw.WriteLine("echo:" + myCheck);
+                sw.WriteLine("textsize:" + TxtTerm.Font.Size.ToString()) ;
+                sw.WriteLine("bgcolor:" + myBGColor);
+                sw.WriteLine("fgcolor:" + myFGColor);
+
+                if (TxtTerm.Font.Bold == true)
+                    myBold = "yes";
+                else
+                    myBold = "no";
+
+                sw.WriteLine("bold:" + myBold);
+            }
+
+
         }
     }
 }

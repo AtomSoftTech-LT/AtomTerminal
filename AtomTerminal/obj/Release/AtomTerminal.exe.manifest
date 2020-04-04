@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AtomTerminal.exe" size="158680">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AtomTerminal.exe" size="159192">
       <assemblyIdentity name="AtomTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YvUM9OB9jLptG6j7M18GwqsiUcRGawh1GeOBS5Eym0g=</dsig:DigestValue>
+        <dsig:DigestValue>3SZ24MPtKxyXAGJqlIWVZe+PcjVSSMY+N/d8Yd6X47o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

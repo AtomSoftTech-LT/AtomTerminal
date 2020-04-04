@@ -70,6 +70,8 @@
             this.radHex = new System.Windows.Forms.RadioButton();
             this.radASCII = new System.Windows.Forms.RadioButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.btnSaveAST = new System.Windows.Forms.Button();
+            this.btnOpenAST = new System.Windows.Forms.Button();
             this.GrpConn.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MyCTRLBOX)).BeginInit();
             this.GrpTR.SuspendLayout();
@@ -163,6 +165,7 @@
             this.ChkEnLog.Text = "Enable Logging";
             this.ChkEnLog.UseVisualStyleBackColor = false;
             this.ChkEnLog.CheckedChanged += new System.EventHandler(this.ChkEnLog_CheckedChanged);
+            this.ChkEnLog.Click += new System.EventHandler(this.ChkEnLog_Click);
             // 
             // BtnOpen
             // 
@@ -483,6 +486,8 @@
             // GrpRCV
             // 
             this.GrpRCV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.GrpRCV.Controls.Add(this.btnOpenAST);
+            this.GrpRCV.Controls.Add(this.btnSaveAST);
             this.GrpRCV.Controls.Add(this.BtnBold);
             this.GrpRCV.Controls.Add(this.BtnFGColor);
             this.GrpRCV.Controls.Add(this.BtnBGColor);
@@ -655,6 +660,40 @@
             this.radASCII.Text = "Ascii";
             this.radASCII.UseVisualStyleBackColor = false;
             // 
+            // btnSaveAST
+            // 
+            this.btnSaveAST.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveAST.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnSaveAST.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSaveAST.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSaveAST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveAST.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveAST.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSaveAST.Location = new System.Drawing.Point(755, 14);
+            this.btnSaveAST.Name = "btnSaveAST";
+            this.btnSaveAST.Size = new System.Drawing.Size(90, 47);
+            this.btnSaveAST.TabIndex = 18;
+            this.btnSaveAST.Text = "Save AST";
+            this.btnSaveAST.UseVisualStyleBackColor = false;
+            this.btnSaveAST.Click += new System.EventHandler(this.btnSaveAST_Click);
+            // 
+            // btnOpenAST
+            // 
+            this.btnOpenAST.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpenAST.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnOpenAST.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnOpenAST.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnOpenAST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenAST.Font = new System.Drawing.Font("Courier New", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenAST.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOpenAST.Location = new System.Drawing.Point(851, 14);
+            this.btnOpenAST.Name = "btnOpenAST";
+            this.btnOpenAST.Size = new System.Drawing.Size(90, 47);
+            this.btnOpenAST.TabIndex = 19;
+            this.btnOpenAST.Text = "Open AST";
+            this.btnOpenAST.UseVisualStyleBackColor = false;
+            this.btnOpenAST.Click += new System.EventHandler(this.btnOpenAST_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -728,6 +767,8 @@
         private System.Windows.Forms.Button BtnFGColor;
         private System.Windows.Forms.Button BtnBold;
         protected System.Windows.Forms.RichTextBox TxtTerm;
+        private System.Windows.Forms.Button btnOpenAST;
+        private System.Windows.Forms.Button btnSaveAST;
     }
 }
 
