@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="AtomTerminal.exe" version="1.0.0.0" publicKeyToken="cc4e0571acd7b39e" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="AtomTerminal.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="AtomTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="AtomTerminal.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options
+             If you want to change the Windows User Account Control level replace the 
+             requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            Specifying requestedExecutionLevel element will disable file and registry virtualization. 
+            Remove this element if your application requires this virtualization for backwards
+            compatibility.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AtomTerminal.exe" size="158680">
+      <assemblyIdentity name="AtomTerminal" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>sEm+DNIzDCX4/6yKZPsIMJ7wQqcFADENbywi8+e0eWg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="AtomTerminal.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ibSJhBWt6kT1jcg30WbAXCZJOzy699/zUdgGnXs5g9w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AtomTerminal.ico" size="7358">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>9Y6kkS3bFWIpTjx51Yg69yC2hUJH3M17QCBIAjF4AFo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of the Windows versions that this application has been tested on
+           and is designed to work with. Uncomment the appropriate elements
+           and Windows will automatically select the most compatible environment. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=ATOMSOFT-JASON\Jason" issuerKeyHash="1ad3526d934303210dd993b67b374700a9c8e340" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>4uF+psJTwQzwm89EFlGnLTUdyFgYTzvnr2V+gGJCSXk=</DigestValue></Reference></SignedInfo><SignatureValue>jz3ROzm7WSkTYkK1qDdJMbc3Dz4z89Xq6mlrnr2pyIMrjs3wikqIkR0sEFAC/Wsqr8D2OWnowfiVEA14eKQ0VqLZNjSjWkFHs8OzZdARu46gVMH2rKS1t2QBOLG0vbXzzM6tBqe5WsHQxRfwFWGUmSrvc1ahoyDaiB4Q4drNYp4=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>mYLCsL+IZpncaP1A5ABb9+lwXhjPeCWFX0Ew0XCeE48/5pGO6L3GttdJpe80rLJe3AYzG4eQPp1hK9Q1zXI17i1QHodtWrgnedhMc+7fTOg8MZPER3N+DoPEjSoii6joQLdNBiporjaoIe8TfkYiDlPf5+ToD3HhUs7gqoMLFM0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="79494262807e65afe73b4f1858c81d352da7511644cf9bf00cc153c2a67ee1e2" Description="" Url=""><as:assemblyIdentity name="AtomTerminal.exe" version="1.0.0.0" publicKeyToken="cc4e0571acd7b39e" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=ATOMSOFT-JASON\Jason</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>I/LmBDDfCOr0AnBHT5AONd7jBwx4vxK2Vbhteow32WI=</DigestValue></Reference></SignedInfo><SignatureValue>CRqSj7RI53cX7dCI1f/xSi9UbvyVTFFxMIwq/otau0+HccYVZxch9nTuOcmON++9/wzRFaanfoh0A4L/C6jCQiWCq0D3pwJyRLfTzBNs8iG4viEVBOQOirc9aXUSRtRFb7AgyJVhxWLe9t5nCzsTtUlPELg5VqZlfwoQ5L+e6To=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>mYLCsL+IZpncaP1A5ABb9+lwXhjPeCWFX0Ew0XCeE48/5pGO6L3GttdJpe80rLJe3AYzG4eQPp1hK9Q1zXI17i1QHodtWrgnedhMc+7fTOg8MZPER3N+DoPEjSoii6joQLdNBiporjaoIe8TfkYiDlPf5+ToD3HhUs7gqoMLFM0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQI440UdoStaNEl5/EK3IVCjANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigAQQBUAE8ATQBTAE8ARgBUAC0ASgBBAFMATwBOAFwASgBhAHMAbwBuMB4XDTIwMDMzMDE4MjYyOVoXDTIxMDMzMTAwMjYyOVowMzExMC8GA1UEAx4oAEEAVABPAE0AUwBPAEYAVAAtAEoAQQBTAE8ATgBcAEoAYQBzAG8AbjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAmYLCsL+IZpncaP1A5ABb9+lwXhjPeCWFX0Ew0XCeE48/5pGO6L3GttdJpe80rLJe3AYzG4eQPp1hK9Q1zXI17i1QHodtWrgnedhMc+7fTOg8MZPER3N+DoPEjSoii6joQLdNBiporjaoIe8TfkYiDlPf5+ToD3HhUs7gqoMLFM0CAwEAATANBgkqhkiG9w0BAQsFAAOBgQAIbmHXgMpy3UR4dVM0N3T1FbuLp0d93yz137fn8cVvDc0ftj5lP7oII5mCI+wlZjmhZKhKYsp/Bw/2/obPV3GvEOk8ESPRfTGqjRMo6zM9vPB7lS4BwdDypBYlpqpD3u6C6h/hjwqXlQ0xadn71v6LzUqbIsRjdXq6amVXf+qNTA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
